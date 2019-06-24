@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.8;
 
 /*
  @title VinoShop
@@ -16,7 +16,7 @@ contract VinoShop {
   address owner;
 //@dev modifer allowing only owner of contract
   modifier onlyOwner(){
-    require(msg.sender == owner);
+    require(msg.sender == owner,   "not working");
     _;
   }
 //@dev creating a struct for wine inventory
@@ -66,7 +66,7 @@ constructor() public {
   addWineItem("Casanova di Neri", "Brunello di Montalcino",1 wei,2000);
 }
 
-function  addWineItem(string _name, string _des, uint _price, uint _qty) private {
+function  addWineItem(string memory _name, string memory _des, uint _price, uint _qty) private {
   wineCount++;
   wines[wineCount] = WineList(wineCount, _name, _des, _price, _qty);
 }
@@ -95,7 +95,7 @@ TODO: figure out a way to accept payment for items
 
 
 */
-function CheckOutCart() payable public {
+function CheckOutCart() public payable {
 
     //wines[id].inv_Qty--  cart[address][x].
     //require(msg.value == subtotal[msg.sender]);
